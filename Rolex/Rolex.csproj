@@ -106,7 +106,7 @@
     <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>"C:\Users\honey\.dotnet\tools\gppg.exe" /out:"$(ProjectDir)parser.cs" /gplex /nolines "$(ProjectDir)SpecFiles\gplex.y"
-"C:\Users\honey\.dotnet\tools\gplex.exe" /out:"$(ProjectDir)Scanner.cs" "$(ProjectDir)SpecFiles\gplex.lex"</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>
