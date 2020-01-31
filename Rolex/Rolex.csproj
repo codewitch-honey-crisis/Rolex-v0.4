@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{440C9EA8-409C-4B1D-88B7-A2B5FFF87700}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>Rolex</AssemblyName>
+    <RootNamespace>Rolex</RootNamespace>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS RANGELIST_DIAGNOSTICS</DefineConstants>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <NoWarn>
+    </NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Numerics" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <EmbeddedResource Include="Shared.frame" />
+    <None Include="Example.rl" />
+    <None Include="GPLEXcopyright.rtf" />
+    <EmbeddedResource Include="Default.frame" />
+    <None Include="LICENSE.md" />
+    <None Include="README.md" />
+    <None Include="SpecFiles\GenerateAll.bat" />
+    <None Include="SpecFiles\gplex - Copy.y" />
+    <None Include="SpecFiles\gplex.lex" />
+    <None Include="SpecFiles\gplex.y" />
+    <None Include="SpecFiles\gplexx.frame" />
+    <None Include="SpecFiles\guesser.frame" />
+    <None Include="SpecFiles\Guesser.lex" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AAST.cs" />
+    <Compile Include="CharClassUtils.cs" />
+    <Compile Include="DFSA.cs" />
+    <Compile Include="ErrorHandler.cs" />
+    <Compile Include="GplexBuffers.cs" />
+    <Compile Include="LexContext.BaseExtensions.cs" />
+    <Compile Include="LexContext.CommonExtensions.cs" />
+    <Compile Include="LexContext.cs" />
+    <Compile Include="LexContext.JsonExtensions.cs" />
+    <Compile Include="LexRule.cs" />
+    <Compile Include="Minimizer.cs" />
+    <Compile Include="NFSA.cs" />
+    <Compile Include="ParseHelper.cs" />
+    <Compile Include="parser.cs" />
+    <Compile Include="Partitions.cs" />
+    <Compile Include="program.cs" />
+    <Compile Include="ScanHelper.cs" />
+    <None Include="SpecFiles\GenerateResource.cs" />
+    <None Include="SpecFiles\LookaheadHelper.cs" />
+    <Compile Include="Scanner.cs" />
+    <Compile Include="TaskState.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ShiftReduceParser\ShiftReduceParserCode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SpecFiles\GplexBuffers.txt" />
+    <None Include="SpecFiles\ResourceHeader.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>"C:\Users\honey\.dotnet\tools\gppg.exe" /out:"$(ProjectDir)parser.cs" /gplex /nolines "$(ProjectDir)SpecFiles\gplex.y"
+"C:\Users\honey\.dotnet\tools\gplex.exe" /out:"$(ProjectDir)Scanner.cs" "$(ProjectDir)SpecFiles\gplex.lex"</PreBuildEvent>
+  </PropertyGroup>
+</Project>

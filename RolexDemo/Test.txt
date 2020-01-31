@@ -1,0 +1,6 @@
+﻿foo
+"bar"
+-1242
+232
+/* fubar */
+foobaz
